@@ -1,0 +1,154 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+}
+
+:root {
+  /* Thanks Lea Verou! */
+  --ON: initial;
+  --OFF: ;
+}
+
+/* Light theme is on by default */
+.theme-default,
+.theme-light {
+  --light: var(--ON);
+  --dark: var(--OFF);
+}
+
+/* Dark theme is off by default */
+.theme-dark {
+  --light: var(--OFF);
+  --dark: var(--ON);
+}
+
+/* If user prefers dark, then that's what they'll get */
+@media (prefers-color-scheme: dark) {
+  .theme-default {
+    --light: var(--OFF);
+    --dark: var(--ON);
+  }
+}
+
+:root{
+  --background-page: var(--light, hsl(47, 20%, 93%)) var(--dark, hsl(207, 11%, 15%));
+  --background-color: var(--light, hsl(207, 60%, 90%)) var(--dark, hsl(207, 48%, 6%));
+  --text-color: var(--light, hsl(207, 80%, 15%)) var(--dark, hsl(207, 80%, 75%));
+  --color-primary: var(--light, hsl(207, 80%, 35%)) var(--dark, hsl(207, 75%, 17%));
+  --color-secondary: var(--light, hsl(47, 90%, 75%)) var(--dark, hsl(47, 90%, 75%));
+  --light-grey: var(--light, #b9b9b4) var(--dark, #b9b9b4);
+  --dark-grey: var(--light, #5b5b58) var(--dark, #5b5b58);
+  --opacity: var(--light, 1) var(--dark, .85);
+  --font-weight: var(--light, 400) var(--dark, 320);
+}
+
+body {
+  font-size: 16px;
+  font-family: 'Truculenta', sans-serif;
+  font-weight: var(--font-weight);
+  color: var(--text-color);
+  background-color: var(--background-page);
+  height: 100vh;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  opacity: var(--opacity);
+  transition: transform .5s ease, opacity .5s ease;
+}
+
+img:hover{
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+ul,
+nav ul {
+  list-style-type: none;
+}
+
+.center{
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+.btn{
+  padding: .5rem .8rem;
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  font-weight: 500    ;
+  text-transform: uppercase;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  border-radius: .25em;
+  cursor: pointer;
+  transition: transform .5s ease-in-out;
+}
+
+.btn:active{
+  transform: scale(.85);
+  transition: transform .125s ease-in-out;
+}
+
+.card{
+  --rnd: .5em;
+  --wgt: 4px;
+
+  width: 20rem;
+  height: auto;
+  padding: 0 ;
+  background-color: var(--background-color);
+  border: var(--wgt) solid var(--color-primary);
+  border-radius: var(--rnd);
+  box-shadow: 0 0 1em rgba(0,0,0,.75);
+}
+
+.card figure{
+  position: relative;
+  overflow: hidden;
+}
+
+.card figcaption{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: .75em .5em;
+  background-color: #000000aa;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.75);
+}
+
+.card img{
+  width: 100%;
+  height: auto;
+  border-top-left-radius: calc(var(--rnd) - var(--wgt));
+  border-top-right-radius: calc(var(--rnd) - var(--wgt));
+}
+
+.card > p {
+  padding: .75em .5em;
+}
+
+.card footer{
+  height: 3em;
+}
+
+#switch{
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: .75em;
+  background: var(--dark-grey);
+}
+
+#switch p{
+  height: 2rem;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" class="theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Truculenta:wght@100..500&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="./css/sty.css">
+</head>
+<body class="center">
+    <article class="card">
+        <figure>
+            <img src="https://picsum.photos/400" alt="Une image">
+            <figcaption>
+                <h1>Un titre</h1>
+                <p>Avec un petit texte pour accompagner ça...</p>
+            </figcaption>
+        </figure>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque earum et beatae ullam vitae totam amet laudantium tenetur, voluptas recusandae, libero mollitia aspernatur sapiente unde, optio consequuntur accusamus iusto delectus?</p>
+        <footer class="center">
+            <button class="btn">Click !</button>
+        </footer>
+    </article>
+
+
+    <div id="switch">
+        <h2>
+            Changer de thème
+        </h2>
+        <ul>
+            <li>OS setting: <span id="os_pref"></span></li>
+            <li>User setting: <span id="user_pref">Light</span></li>
+        </ul>
+        <p class="center">
+            <button class="btn" id="toggle">Toggle</button>
+        </p>
+        <p class="center">
+            <button class="btn" id="erase">localStorage</button>
+        </p>
+    </div>
+
+    <script src="./js/main.js"></script>
+</body>
+</html>

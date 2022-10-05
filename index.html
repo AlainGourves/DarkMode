@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Theme's switch</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Truculenta:wght@100..500&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="./css/sty.css">
@@ -13,31 +13,36 @@
         <figure>
             <img src="https://picsum.photos/400" alt="Une image">
             <figcaption>
-                <h1>Un titre</h1>
-                <p>Avec un petit texte pour accompagner ça...</p>
+                <h1>A relevant title</h1>
+                <p>With some text...</p>
             </figcaption>
         </figure>
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque earum et beatae ullam vitae totam amet laudantium tenetur, voluptas recusandae, libero mollitia aspernatur sapiente unde, optio consequuntur accusamus iusto delectus?</p>
         <footer class="center">
-            <button class="btn">Click !</button>
+            <button class="btn">Button !</button>
         </footer>
     </article>
 
 
-    <div id="switch">
+    <div id="settings">
         <h2>
-            Changer de thème
+            Change mode
         </h2>
         <ul>
             <li>OS setting: <span id="os_pref"></span></li>
             <li>User setting: <span id="user_pref">Light</span></li>
         </ul>
-        <p class="center">
-            <button class="btn" id="toggle">Toggle</button>
-        </p>
-        <p class="center">
-            <button class="btn" id="erase">localStorage</button>
-        </p>
+
+        <div id="toggle__mode">
+            <div>Mode</div>
+            <input type="checkbox" name="select__mode" id="select__mode">
+            <label for="select__mode"></label>
+        </div>
+
+        <div id="localStorage__erase">
+            <div>LocalStorage</div>
+            <button id="erase"></button>
+        </div>
     </div>
 
     <script src="./js/main.js"></script>

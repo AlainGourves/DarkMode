@@ -1,0 +1,48 @@
+@use 'colors' as *;
+
+/* Light theme is on by default */
+.theme-default,
+.theme-light {
+    --light: var(--ON);
+    --dark: var(--OFF);
+}
+
+/* Dark theme is off by default */
+.theme-dark {
+    --light: var(--OFF);
+    --dark: var(--ON);
+}
+
+/* If user prefers dark, then that's what they'll get */
+@media (prefers-color-scheme: dark) {
+    .theme-default {
+        --light: var(--OFF);
+        --dark: var(--ON);
+    }
+}
+
+:root {
+    /* Thanks Lea Verou! */
+    --ON: initial;
+    --OFF: ;
+
+    @each $color-name, $color-code in $colors {
+        --#{$color-name}: var(--light, #{nth($color-code, 1)}) var(--dark, #{nth($color-code, 2)});
+    }
+
+
+    --bsh: 0px 0px 2px rgba(0, 0, 0, .5);
+}
+// :root {
+//     --background-page: var(--light, hsl(47, 20%, 93%)) var(--dark, hsl(207, 11%, 15%));
+//     --background-color: var(--light, hsl(207, 60%, 90%)) var(--dark, hsl(207, 48%, 6%));
+//     --text-color: var(--light, hsl(207, 80%, 15%)) var(--dark, hsl(207, 80%, 75%));
+//     --color-primary: var(--light, hsl(207, 80%, 35%)) var(--dark, hsl(207, 75%, 17%));
+//     --color-secondary: var(--light, hsl(47, 90%, 75%)) var(--dark, hsl(47, 20%, 25%));
+//     --light-grey: var(--light, hsl(207, 3%, 50%)) var(--dark, hsl(207, 3%, 30%));
+//     --dark-grey: var(--light, hsl(207, 3%, 70%)) var(--dark, hsl(207, 3%, 15%));
+
+//     --opacity: var(--light, 1) var(--dark, .85);
+//     --font-weight: var(--light, 400) var(--dark, 320);
+// }
+

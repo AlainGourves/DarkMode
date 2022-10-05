@@ -1,24 +1,42 @@
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme : dark)");
 const html = document.querySelector("html");
-const os_pref = document.querySelector("#os_pref");
-const user_pref = document.querySelector("#user_pref");
-const toggle_btn = document.querySelector("#toggle");
-const erase_btn = document.querySelector("#erase");
+const myThemeOSPref = document.querySelector("#os_pref");
+const myThemeUserPref = document.querySelector("#user_pref");
+const myThemeToggleBtn = document.querySelector("#select__mode");
+const myThemeEraseLocalStorage = document.querySelector("#localStorage__erase");
+const myThemeEraseBtn = myThemeEraseLocalStorage.querySelector("#erase");
 
-let theme = "Light"; // default mode
+let myThemeOS, myThemeUser, myTheme;
 
 function updateOSTheme(){
-    theme = (prefersDarkScheme.matches) ? "Dark" : "Light";
-    os_pref.textContent = theme;
+    myThemeOS = (prefersDarkScheme.matches) ? "Dark" : "Light";
+    myThemeOSPref.textContent = myThemeOS;
 }
 
 function setTheme(){
-    if (theme === "Light"){
-        html.classList.add("theme-light");
-        html.classList.remove("theme-dark");
+    if (myThemeUser && (["Light", "Dark"].includes(myThemeUser))) {
+        // User's change has priority
+        myTheme = myThemeUser;
+        if (myThemeEraseLocalStorage.classList.contains('disabled')){
+            myThemeEraseLocalStorage.classList.remove('disabled');
+        }
+    }else if(myThemeOS && (["Light", "Dark"].includes(myThemeOS))){
+        myTheme = myThemeOS;
     }else{
-        html.classList.add("theme-dark");
-        html.classList.remove("theme-light");
+        // defaults to "Light"
+        myTheme = "Light"
+    }
+    myThemeToggleBtn.checked = (myTheme === "Light");
+
+    // switch
+    switch(myTheme) {
+        case "Dark":
+            html.classList.add("theme-dark");
+            html.classList.remove("theme-light");
+            break;
+        default:
+            html.classList.add("theme-light");
+            html.classList.remove("theme-dark");
     }
 }
 
@@ -26,34 +44,37 @@ window.addEventListener("load", e => {
     if (window.matchMedia) {
         updateOSTheme();
         
+        // Listen for OS level theme's changes
         window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
             updateOSTheme();
+            setTheme();
         });
     }
 
-    console.log("thème: ", theme)
-
-    if(localStorage.getItem("theme")){
-        theme = localStorage.getItem("theme");
-        user_pref.textContent = theme;
-        html.classList.add("theme-" + theme.toLowerCase())
+    if(localStorage.getItem("myTheme")){
+        myThemeUser = localStorage.getItem("myTheme");
+        myThemeUserPref.textContent = myThemeUser;
     }else{
-        user_pref.textContent = "None";
-        console.log("Pas de thème enregistré");
+        myThemeUserPref.textContent = "None";
+        myThemeEraseLocalStorage.classList.add('disabled');
     }
     
     setTheme();
     
-    toggle_btn.addEventListener('click', e => {
-        theme = (theme === "Light") ? "Dark" : "Light";
-        user_pref.textContent = theme;
-        localStorage.setItem("theme", theme);
+    // Button for local theme's change
+    myThemeToggleBtn.addEventListener('change', e => {
+        myThemeUser = (myTheme === "Light") ? "Dark" : "Light";
+        myThemeUserPref.textContent = myThemeUser;
+        localStorage.setItem("myTheme", myThemeUser);
         setTheme();
     })
     
-    erase_btn.addEventListener('click', e => {
-        localStorage.removeItem('theme');
-        user_pref.textContent = "None";
+    // Button to erase local setting
+    myThemeEraseBtn.addEventListener('click', e => {
+        myThemeUser = undefined;
+        localStorage.removeItem('myTheme');
+        myThemeUserPref.textContent = "None";
+        myThemeEraseLocalStorage.classList.add('disabled');
         // mode defaults to OS's setting
         updateOSTheme();
         setTheme();

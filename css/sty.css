@@ -211,3 +211,4 @@ nav ul {
 #toggle__mode input:checked + label::before {
   left: calc(var(--w) - (var(--l) - var(--m)));
 }
+/*# sourceMappingURL=sty.css.map */

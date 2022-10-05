@@ -30,7 +30,7 @@ function style () {
             basename: "sty",
             extname: ".css"
         }))
-        .pipe(gulp.dest('./css/'))
+        .pipe(gulp.dest('./css/', { sourcemaps: '.' })) // external sourcemap
         .pipe(browserSync.stream());
 };
 
